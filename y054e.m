@@ -1,9 +1,15 @@
 clc, clear all
 rng('shuffle')
 
+title = 'yo54eI';
 addpath('functions');  % Andy - reorganised program files
 addpath('instructions');  % Andy - reorganised program files
 
+answer = exist('data', 'dir');
+
+if exist('data', 'dir') ~= 7  % check for data directory
+    mkdir('data')  % make it if it doesn't exist
+end
 
 % variables modificables
 numBlocks1A = 6;
@@ -166,7 +172,8 @@ for trial = 1:size(sequence, 1)
 
     % guardar datos
     DATA.trials = [DATA.trials; trial, sequence(trial,:), responseVariables];
-    save(strcat('y054e_subj', (int2str(DATA.subject))),'DATA');
+    DATA.finish_time = datestr(now, 0);
+    save(['data/y054e_subj', (int2str(DATA.subject))],'DATA');
 
 end
 
